@@ -1,0 +1,39 @@
+body{
+    background-color:#eff0f2;
+}
+
+.nav-wrapper{
+    background-color: #455a64;   
+}
+.page-footer{
+    background-color: #455a64;  
+}
+
+.jumbotron{
+    background-image: url(https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0c4b5fcc53abd6158286dc86a9be4bee&auto=format&fit=crop&w=1050&q=80);
+}
+
+.btn-lg{
+    color: white;
+    background-color: #455a64;
+    margin-right: 10px; 
+}
+.brand-logo{
+    margin-right: 50px;
+}
+
+.offset-s3 {
+    margin-top: 50px; 
+    margin-right: 350px;
+}
+
+.username,.password{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.google{
+    color: white;
+    margin-right: 5px;
+    background: #455a64;
+}
