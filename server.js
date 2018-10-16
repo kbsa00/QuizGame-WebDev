@@ -8,6 +8,7 @@ require('./middleware/appMiddlewares')(app);
 require('./routes/authRoutes')(app);
 
 if(process.env.NODE == 'production'){
+    app.use(express.static(path.join(__dirname, 'client/dist')));
     const path = require('path')
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname+'/client/dist/index.html'));
