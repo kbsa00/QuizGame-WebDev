@@ -8,7 +8,7 @@
     "client": "npm run start --prefix client",
     "start":  "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server.js",
-    "heroku-postbuild": "config:set NPM_CONFIG_PRODUCTION=true webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run prebuild --prefix client"
   },
   "author": "",
   "license": "ISC",
