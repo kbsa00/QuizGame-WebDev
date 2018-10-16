@@ -15,15 +15,6 @@ module.exports = (app) => {
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(passport.session());
-    
-    if(process.env.NODE == 'production'){
-        app.use(express.static('client/build'))
-      
-        const path = require('path')
-        app.get('*', (req, res) => {
-            res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
-        });
-    }
       
     mongoose.connect(keys.mongo_URI, {
         useNewUrlParser: true
