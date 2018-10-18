@@ -2,9 +2,8 @@ const passport = require('passport');
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-//const LocalStrategy = require('passport-local').Strategy;  
-const GoogleUser = mongoose.model('GoogleUser');
-//const LocalUser = mongoose.model('localuser')
+const GoogleUser = mongoose.model('GoogleUser');;
+
 
 //Creating a cookie for the user. 
 passport.serializeUser((user, done) => {
