@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
 const session = require('express-session'); 
-const mongoStore = require('connect-mongo')(session); 
+
 
 module.exports = (app) => {
     app.use(cookieSession({
@@ -17,16 +17,8 @@ module.exports = (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
+    mongoose.set('useCreateIndex', true);
     mongoose.connect(keys.mongo_URI, {
         useNewUrlParser: true
     });
-    mongoose.set('useCreateIndex', true);
 }
-
-/**
- *     app.use(session({
-        secret: 'login backend', 
-        resave: true,
-        saveUninitialized: false
-    }));
- */

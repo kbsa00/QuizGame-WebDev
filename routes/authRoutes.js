@@ -1,6 +1,8 @@
 const passport = require('passport');
 let localUser = require('../models/localUser');
 const bcrypt = require('bcryptjs');
+const keys = require('../config/keys');
+const jwt = require('jsonwebtoken'); 
 
 
 module.exports = (app) => {
@@ -12,7 +14,7 @@ module.exports = (app) => {
     app.get(
         '/auth/google/callback',
         passport.authenticate('google'), (req, res) => {
-            res.redirect('/');
+            req.session.token = req.user.token
         }
     );
 
@@ -25,7 +27,7 @@ module.exports = (app) => {
         res.redirect('/');
     });
 
-    /** 
+    
     app.post('/register', (req, res) => {
 
         if (req.body.email && req.body.password && req.body.username) {
@@ -46,31 +48,35 @@ module.exports = (app) => {
 
 
     app.post('/login', (req, res) => {
+        
         let {username, password} = req.body;
 
         localUser.findOne({username: username}, (err, userInformation) => {
             if (!err) {
                 let passwordCheck = bcrypt.compareSync(password, userInformation.password);
+                
                 if (passwordCheck) {
-                    req.session.user = {
+                   const jwtToken =  jwt.sign({
+                        email: userInformation.email,
                         username: userInformation.username,
-                        password: userInformation.password
-                    };
+                        userID: userInformation._id, 
 
-                    req.session.user.expires = new Date(
-                        Date.now() + 3600 * 60 * 1000
-                    );
-                    req.session.user.cookie = req.session.expires; 
-                    res.status(200).send('Logget inn');
+                    },
+                    keys.JWT_KEY, {
+                        expiresIn: "2h"
+                    });
+
+
+                    res.status(200).json({
+                        message: "Logged in successful",
+                        token: jwtToken, 
+                    })
                 } else {
-                    res.status(401).send('Wrong')
+                    res.status(401).json({
+                        message: "Wrong Email or Password"
+                    })
                 }
             }
         });
-
-        console.log(req.session.user);
-
-    });
-    */
-    
+    });    
 }
