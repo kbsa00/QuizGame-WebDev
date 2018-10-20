@@ -1,9 +1,6 @@
 const mongoose = require('mongoose'); 
 const {Schema} = mongoose;
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); 
-
-mongoose.Promise = Promise;
 
 const localUserSchema = new Schema({
     email:{
@@ -38,8 +35,6 @@ localUserSchema.pre('save', function save(next) {
       });
     });
   });
-
+   
 let LocalUser = mongoose.model('localuser', localUserSchema);
-
-
 module.exports = LocalUser;
