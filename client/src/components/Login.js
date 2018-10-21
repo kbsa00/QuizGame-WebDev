@@ -1,35 +1,54 @@
 import React, { Component } from 'react'
+import {UserloginAction} from '../actions/index'; 
+import {connect} from 'react-redux'; 
+import {Field, reduxForm} from 'redux-form'; 
 
-//Redux Form in here!!
 
-export default class Login extends Component {
+class Login extends Component {
+
+  constructor(props){
+    super(props);
+  }
+
+  onButtonSubmit(values){
+    this.props.UserloginAction(values)
+  }
+
   render() {
+    const {handleSubmit} = this.props;
+
     return (
       <div>
         <div className="row">
+      
          <div className="col s6 offset-s3 z-depth-1" id="panell">
             <h5>Login</h5>
-            <form>
-            <div className="input-field" id="username">
-               <label htmlFor="username">Username</label>
-               <input type="text" className="validate">
-                   
-               </input>
-            </div>
-   
-            <div className="input-field">
-               <label htmlFor="password">Password</label>
-               <input type="password" className="validate">
-                 
-               </input>
-            </div>
+            <form onSubmit={handleSubmit(this.onButtonSubmit.bind(this))}>
 
-            <a className="btn btn-primary btn-lg right" href="#" role="button">
-                Login
-              </a>
-            <a className="btn btn-primary btn-lg right" href="#" role="button">
-                Google +
-            </a>
+              <div>
+                  <Field
+                    name="username"
+                    component="input"
+                    type="text"
+                    placeholder="Username"
+                  />
+              </div>
+
+              <div>
+                <Field
+                  name="password"
+                  component="input"
+                  type="Password"
+                  placeholder="Password"
+                />
+              </div>
+              <div>
+                <button 
+                  type="submit" 
+                  className="btn btn-primary btn-lg right">
+                  Login
+                </button>
+              </div>
             </form>
          </div>
          </div>
@@ -37,3 +56,11 @@ export default class Login extends Component {
     );
   }
 }
+
+
+
+export default reduxForm({
+  form: 'Loginform'
+})(
+connect(null, {UserloginAction})(Login)
+);

@@ -1,4 +1,3 @@
-const passport = require('passport');
 let localUser = require('../models/localUser');
 const bcrypt = require('bcryptjs');
 const keys = require('../config/keys');
@@ -6,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (app) => {
 
-    app.post('/register', (req, res) => {
+    app.post('/api/register', (req, res) => {
 
         if (req.body.email && req.body.password && req.body.username) {
             new localUser({
@@ -25,7 +24,7 @@ module.exports = (app) => {
     });
 
     
-    app.post('/login', (req, res) => {
+    app.post('/api/login', (req, res) => {
 
         let {
             username,

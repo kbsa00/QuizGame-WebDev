@@ -1,1 +1,1 @@
-export const ACTION_TYPE = 'INSERT NAME HERE.'
+export const LOGIN_USER = 'login_user';
