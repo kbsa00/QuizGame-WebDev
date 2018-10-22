@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import projectReducer from './projectReducer.js';
+import authReducer from './authReducer.js';
 import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
-  state: projectReducer,
+  auth: authReducer,
   form: formReducer
 });
 

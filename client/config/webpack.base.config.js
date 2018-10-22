@@ -32,6 +32,14 @@ module.exports = env => {
             }
           ]
         },
+        devServer: {
+          proxy: {
+            "/api/*": {
+              target: "http://localhost:3000/",
+              secure: "true"
+            }
+          },
+        },
         plugins: [
           new HtmlWebpackPlugin({
             template: './src/index.html',

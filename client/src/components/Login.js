@@ -5,14 +5,15 @@ import {Field, reduxForm} from 'redux-form';
 
 
 class Login extends Component {
-
-  constructor(props){
-    super(props);
-  }
-
   onButtonSubmit(values){
+    
     this.props.UserloginAction(values)
-  }
+    .then(() =>{
+        if(this.props.auth) console.log('logged in')
+        else console.log('unsuccsessfully logged')
+    })
+}
+
 
   render() {
     const {handleSubmit} = this.props;
@@ -23,15 +24,16 @@ class Login extends Component {
       
          <div className="col s6 offset-s3 z-depth-1" id="panell">
             <h5>Login</h5>
-            <form onSubmit={handleSubmit(this.onButtonSubmit.bind(this))}>
 
+            <form onSubmit={handleSubmit(this.onButtonSubmit.bind(this))}>
               <div>
+
                   <Field
                     name="username"
                     component="input"
                     type="text"
                     placeholder="Username"
-                  />
+                   />
               </div>
 
               <div>
@@ -42,8 +44,9 @@ class Login extends Component {
                   placeholder="Password"
                 />
               </div>
+              
               <div>
-                <button 
+                <button
                   type="submit" 
                   className="btn btn-primary btn-lg right">
                   Login
@@ -51,6 +54,7 @@ class Login extends Component {
               </div>
             </form>
          </div>
+         
          </div>
       </div>
     );
@@ -59,8 +63,13 @@ class Login extends Component {
 
 
 
+
+function mapStateToProps(state){
+  return{auth: state.auth};
+}
+
 export default reduxForm({
   form: 'Loginform'
 })(
-connect(null, {UserloginAction})(Login)
+connect(mapStateToProps, {UserloginAction})(Login)
 );
