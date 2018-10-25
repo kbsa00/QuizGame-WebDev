@@ -1,12 +1,26 @@
 const bodyParser = require('body-parser');
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
-const cors = require('cors'); 
-
+const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session');
 
 module.exports = (app) => {
+
+    app.use(session({
+        secret: keys.COOKIE_SECRET_KEY,
+        resave: false,
+        cookie: {
+            maxAge: 30 * 24 * 60 * 60 * 1000 //Huske å endre dette fra 30 dager til 2 timer elns
+        },
+        saveUninitialized: true
+    }));
+
     app.use(bodyParser.json());
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(cors());
+    
     mongoose.set('useCreateIndex', true);
     mongoose.connect(keys.mongo_URI, {
         useNewUrlParser: true
@@ -14,9 +28,8 @@ module.exports = (app) => {
 
     if (process.env.NODE_ENV === 'production') {
         app.use(express.static('client/dist'));
-      
         app.get('*', (req, res) => {
-          res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+            res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
         });
-      }
+    }
 }

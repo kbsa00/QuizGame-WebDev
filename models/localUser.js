@@ -20,6 +20,7 @@ const localUserSchema = new Schema({
         required: true
     }
 });
+let LocalUser = mongoose.model('localuser', localUserSchema);
 
 localUserSchema.pre('save', function save(next) {
     if (!this.isModified('password')) return next();
@@ -34,7 +35,7 @@ localUserSchema.pre('save', function save(next) {
         next();
       });
     });
-  });
-   
-let LocalUser = mongoose.model('localuser', localUserSchema);
+});
+
 module.exports = LocalUser;
+

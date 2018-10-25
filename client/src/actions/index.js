@@ -1,6 +1,7 @@
 import {
     LOGIN_USER,
-    ERROR_LOGIN
+    ERROR_LOGIN,
+    FETCH_USER
 } from './types';
 import axios from 'axios';
 
@@ -16,7 +17,23 @@ export const UserloginAction = (values) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ERROR_LOGIN,
-            payload: null
-        })    
+            payload: false
+        });   
+    }
+}
+
+
+export const fetchCurrentUser = () => async(dispatch) => {
+    try{
+        const res = await axios.get('/api/current_user');
+        dispatch({
+            type: FETCH_USER,
+            payload: res.data
+        });
+    }catch(error){
+        dispatch({
+            type: ERROR_LOGIN, 
+            payload: false
+        });
     }
 }

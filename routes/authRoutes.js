@@ -1,12 +1,10 @@
 let localUser = require('../models/localUser');
-const bcrypt = require('bcryptjs');
-const keys = require('../config/keys');
-const jwt = require('jsonwebtoken');
+const passport = require('passport');
+let {checkAuthentication} = require('../middleware/authenticationMiddleware');
 
 module.exports = (app) => {
 
     app.post('/api/register', (req, res) => {
-
         if (req.body.email && req.body.password && req.body.username) {
             new localUser({
                     email: req.body.email,
@@ -23,46 +21,31 @@ module.exports = (app) => {
         }
     });
 
-    
-    app.post('/api/login', (req, res) => {
-
-        let {
-            username,
-            password
-        } = req.body;
-
-        localUser.findOne({
-            username: username
-        }, (err, userInformation) => {
-
-            if (userInformation) {
-                let passwordCheck = bcrypt.compareSync(password, userInformation.password);
-                
-                if (passwordCheck) {
-                    const jwtToken = jwt.sign({
-                            email: userInformation.email,
-                            username: userInformation.username,
-                            userID: userInformation._id
-                        },
-                        keys.JWT_KEY, {
-                            expiresIn: "2h"
-                        });
-
-                    res.status(200).json({
-                        message: "Logged in successful",
-                        token: jwtToken,
-                    })
-                } else {
-                    res.status(401).json({
-                        message: "Wrong Email or Password"
-                    });
-                }
-
-            } else {
-                res.status(401).json({
-                    message: "Wrong Email or Password"
+    app.post(
+        "/api/login",
+        passport.authenticate('local'), (req, res) => {
+            if (req.user) {
+                res.json({
+                    userId: req.user.id,
+                    username: req.user.username
                 });
+
+                return;
             }
+
+            res.status(401).send();
+        }
+    );
+
+    app.get('/api/logout', (req, res) => {
+        req.logout();
+        res.redirect('/');
+    });
+
+    app.get('/api/current_user', checkAuthentication, (req, res) => {
+        res.json({
+            userId: req.user.id,
+            username: req.user.username
         });
     });
 }
