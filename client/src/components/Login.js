@@ -5,12 +5,12 @@ import {Field, reduxForm} from 'redux-form';
 
 
 class Login extends Component {
+
   onButtonSubmit(values){
-    
     this.props.UserloginAction(values)
     .then(() =>{
-        if(this.props.auth) console.log('logged in')
-        else console.log('unsuccsessfully logged')
+        if(this.props.auth) console.log('loggedin')
+        else console.log('unsuccessfull...');
     })
 }
 
@@ -27,7 +27,6 @@ class Login extends Component {
 
             <form onSubmit={handleSubmit(this.onButtonSubmit.bind(this))}>
               <div>
-
                   <Field
                     name="username"
                     component="input"
@@ -60,8 +59,6 @@ class Login extends Component {
     );
   }
 }
-
-
 
 
 function mapStateToProps(state){

@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 
@@ -19,7 +18,7 @@ module.exports = (app) => {
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(cors());
+  
     
     mongoose.set('useCreateIndex', true);
     mongoose.connect(keys.mongo_URI, {

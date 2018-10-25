@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'; 
 import {connect} from 'react-redux'; 
 
 class Header extends Component{
@@ -24,7 +23,7 @@ class Header extends Component{
             <div>
                 <nav>
                     <div className="nav-wrapper">
-                        <a href="#!" className="brand-logo center">APP NAME</a>
+                        <a href="/" className="brand-logo center">APP NAME</a>
 
                         <ul className="right">
                            {this.renderingContent()}

@@ -3,7 +3,7 @@ const passport = require('passport');
 let {checkAuthentication} = require('../middleware/authenticationMiddleware');
 
 module.exports = (app) => {
-
+    
     app.post('/api/register', (req, res) => {
         if (req.body.email && req.body.password && req.body.username) {
             new localUser({
@@ -29,8 +29,6 @@ module.exports = (app) => {
                     userId: req.user.id,
                     username: req.user.username
                 });
-
-                return;
             }
 
             res.status(401).send();
