@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'; 
+import {Link} from 'react-router-dom'; 
 
 class Header extends Component{
 
@@ -7,12 +8,14 @@ class Header extends Component{
         switch(this.props.auth){
             case null:
             case false: 
-             return <li><a href="/login">Logg in</a></li>
-
+             return [
+                 <li key="login"><Link to="login">Logg in</Link></li>,
+                 <li key="create"><Link to="register">Create a user</Link></li>
+                ]
             default: 
             return [
                 <li key="1"><a href="/api/logout">Logout</a></li>,
-                <li key="2"><a href="/StartGame">Start Game</a></li>
+                <li key="2"><Link to="StartGame">Start Game</Link></li>
             ]
 
         }
@@ -23,7 +26,7 @@ class Header extends Component{
             <div>
                 <nav>
                     <div className="nav-wrapper">
-                        <a href="/" className="brand-logo center">APP NAME</a>
+                        <Link to="/" className="brand-logo center">APP NAME</Link>
 
                         <ul className="right">
                            {this.renderingContent()}

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Landing() {
   return (
@@ -12,12 +13,12 @@ export default function Landing() {
             ea commodo consequat. Duis aute irure dolor in reprehenderitin voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
             sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <p>
-              <a className="btn btn-primary btn-lg" href="#" role="button">
+              <Link className="btn btn-primary btn-lg" to="login" role="button">
                 login
-              </a>
-              <a className="btn btn-primary btn-lg" href="#" role="button">
+              </Link>
+              <Link className="btn btn-primary btn-lg" to="register" role="button">
                 Register
-              </a>
+              </Link>
             </p>
           </div>
         

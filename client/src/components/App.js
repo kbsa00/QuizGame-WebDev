@@ -5,6 +5,7 @@ import Landing from './Landing';
 import Login from './Login'; 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
+import registration from '../components/registrationform/Registration';
 import * as actions from '../actions';
 
 class App extends Component{
@@ -15,12 +16,15 @@ class App extends Component{
     render(){
         return(
             <div>
-                <Header/>
                 <BrowserRouter>
+                 <div>
+                 <Header/>
                  <Switch>
                     <Route exact path='/' component={Landing}/>
                     <Route exact path='/login' component={Login}/>
+                    <Route exact path='/register' component={registration}/>
                  </Switch>
+                 </div>
                 </BrowserRouter>
                <Footer/>
             </div>
