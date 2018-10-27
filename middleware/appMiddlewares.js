@@ -6,7 +6,6 @@ const session = require('express-session');
 const express = require('express');
 
 module.exports = (app) => {
-
     app.use(session({
         secret: keys.COOKIE_SECRET_KEY,
         resave: false,

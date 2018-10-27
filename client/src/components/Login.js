@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import {UserloginAction} from '../actions/index'; 
 import {connect} from 'react-redux'; 
-import {Field, reduxForm} from 'redux-form'; 
+import {Field, reduxForm} from 'redux-form';
+import {withRouter} from 'react-router-dom'; 
 
 
 class Login extends Component {
 
+  state = {
+    error: false
+  }
+
   onButtonSubmit(values){
-    this.props.UserloginAction(values)
-    .then(() =>{
-        if(this.props.auth) console.log('loggedin')
-        else console.log('unsuccessfull...');
-    })
+    this.props.UserloginAction(values, this.props.history)
+    .then(() => {
+
+        if(this.props.auth === false){
+          this.setState({
+            error: 'Failed login, Username or password is wrong.'
+          });
+        }
+        
+    });
 }
 
 
@@ -51,6 +61,10 @@ class Login extends Component {
                   Login
                 </button>
               </div>
+
+              <div className="red-text">
+              {this.state.error}
+          </div>
             </form>
          </div>
          </div>
@@ -67,5 +81,5 @@ function mapStateToProps(state){
 export default reduxForm({
   form: 'Loginform'
 })(
-connect(mapStateToProps, {UserloginAction})(Login)
+connect(mapStateToProps, {UserloginAction})(withRouter(Login))
 );

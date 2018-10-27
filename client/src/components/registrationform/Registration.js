@@ -10,6 +10,10 @@ import _ from 'lodash';
 
 
 class Registration extends Component {
+  
+  state = {
+    regError: false
+  }
 
   renderFields(){
     return _.map(formFields, ({label, name, type}) => {
@@ -28,7 +32,15 @@ class Registration extends Component {
       username: values.username,
       password: values.password
     }
-    this.props.createUser(userInfo, this.props.history);
+    this.props.createUser(userInfo, this.props.history)
+    .then(() => {
+       if (this.props.auth === false) {
+         
+          this.setState({
+            regError: 'Email or Username already exist, Try again'
+          }) 
+       }
+    });
   }
 
   render() {
@@ -44,6 +56,9 @@ class Registration extends Component {
          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             {this.renderFields()}
            
+            <div className="red-text">
+              {this.state.regError}
+            </div>
            <div>
              <button
                type="submit" 
@@ -75,9 +90,13 @@ function validate(values){
   return errors;
 }
 
+function mapStateToProps({auth}){
+ return {auth: auth}
+}
+
 export default reduxForm({
   validate,
   form: 'registrationForm'
 })(
-  connect(null, {createUser})(withRouter(Registration))
+  connect(mapStateToProps, {createUser})(withRouter(Registration))
 ); 

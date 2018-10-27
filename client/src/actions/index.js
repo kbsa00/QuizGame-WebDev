@@ -9,13 +9,14 @@ import axios from 'axios';
 
 
 
-export const UserloginAction = (values) => async (dispatch) => {
+export const UserloginAction = (values, history) => async (dispatch) => {
     try {
         const res = await axios.post('/api/login', values);
         dispatch({
             type: LOGIN_USER,
             payload: res.data
         });
+        history.push('/');
     } catch (error) {
         dispatch({
             type: ERROR_LOGIN,
@@ -50,7 +51,8 @@ export const createUser = (values, history) => async(dispatch) => {
     .catch(err => {
         dispatch({
             type: ERROR_LOGIN,
-            payload: false
+            payload: false,
+            error: 'Email or Username already exist'
         });
     })
 }
