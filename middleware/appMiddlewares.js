@@ -12,14 +12,13 @@ module.exports = (app) => {
         cookie: {
             maxAge: 30 * 24 * 60 * 60 * 1000 //Huske å endre dette fra 30 dager til 2 timer elns
         },
-        saveUninitialized: true
+        saveUninitialized: false
     }));
 
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(passport.session());
   
-    
     mongoose.set('useCreateIndex', true);
     mongoose.connect(keys.mongo_URI, {
         useNewUrlParser: true

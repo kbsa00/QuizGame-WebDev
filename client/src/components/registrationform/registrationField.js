@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default ({input, label, meta: {error, touched}}) => {
+export default ({input, label, type, meta: {error, touched}}) => {
     return(
         <div>
             <label>{label}</label>
             <input 
-                {...input}
+                {...input} type={type}
             />
             <div className="red-text">
                 {touched && error}

@@ -21,8 +21,8 @@ class App extends Component{
                  <Header/>
                  <Switch>
                     <Route exact path='/' component={Landing}/>
-                    <Route exact path='/login' component={Login}/>
-                    <Route exact path='/register' component={registration}/>
+                    <Route path='/login' component={Login}/>
+                    <Route path='/register' component={registration}/>
                  </Switch>
                  </div>
                 </BrowserRouter>

@@ -9,7 +9,7 @@ class Header extends Component{
             case null:
             case false: 
              return [
-                 <li key="login"><Link to="login">Logg in</Link></li>,
+                 <li key="login"><Link to="login">Login</Link></li>,
                  <li key="create"><Link to="register">Create a user</Link></li>
                 ]
             default: 
@@ -17,7 +17,6 @@ class Header extends Component{
                 <li key="1"><a href="/api/logout">Logout</a></li>,
                 <li key="2"><Link to="StartGame">Start Game</Link></li>
             ]
-
         }
     }
 

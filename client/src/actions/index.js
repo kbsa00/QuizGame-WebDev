@@ -1,9 +1,11 @@
 import {
     LOGIN_USER,
     ERROR_LOGIN,
-    FETCH_USER
+    FETCH_USER, 
+    CREATE_USER
 } from './types';
 import axios from 'axios';
+
 
 
 
@@ -36,4 +38,19 @@ export const fetchCurrentUser = () => async(dispatch) => {
             payload: false
         });
     }
+}
+
+
+export const createUser = (values, history) => async(dispatch) => {
+    axios
+    .post('/api/register', values)
+    .then(() =>{
+       history.push('/login');
+    })
+    .catch(err => {
+        dispatch({
+            type: ERROR_LOGIN,
+            payload: false
+        });
+    })
 }

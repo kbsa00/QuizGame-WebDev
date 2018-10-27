@@ -37,7 +37,12 @@ module.exports = (app) => {
 
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.redirect('/');
+        res.status(200).clearCookie('connect.sid', {
+            path: '/'
+          });
+          req.session.destroy(function (err) {
+            res.redirect('/');
+          });
     });
 
     app.get('/api/current_user', checkAuthentication, (req, res) => {

@@ -1,17 +1,21 @@
 export default [{
         label: 'Email',
-        name: 'title'
+        name: 'email',
+        type: 'text'
     },
     {
         label: 'Username',
-        name: 'subject'
+        name: 'username',
+        type: 'text'
     },
     {
         label: 'Password',
-        name: 'body'
+        name: 'password',
+        type: 'Password'
     },
     {
         label: 'Re-enter password',
-        name: 'passwordcheck'
+        name: 'passwordcheck',
+        type: 'Password'
     }
 ];
