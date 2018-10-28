@@ -35,7 +35,7 @@ class Registration extends Component {
     this.props.createUser(userInfo, this.props.history)
     .then(() => {
        if (this.props.auth === false) {
-         
+
           this.setState({
             regError: 'Email or Username already exist, Try again'
           }) 
@@ -51,7 +51,13 @@ class Registration extends Component {
       <div className="row">
       
       <div className="col s6 offset-s3 z-depth-1" id="panell">
-         <h5>Registration</h5>
+         <h4 className="center">Registration</h4>
+         <p className="lead text-muted center">
+            You can simply create a user with us. All you need to do is to fill out 
+            all of the credentials. Easy steps before be able to play games on our 
+            platform.
+         
+         </p>
 
          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             {this.renderFields()}

@@ -20,7 +20,7 @@ class Login extends Component {
             error: 'Failed login, Username or password is wrong.'
           });
         }
-        
+
     });
 }
 
@@ -32,8 +32,13 @@ class Login extends Component {
       <div>
         <div className="row">
       
-         <div className="col s6 offset-s3 z-depth-1" id="panell">
-            <h5>Login</h5>
+         <div className="col s6 offset-s3 z-depth-1" id="panel">
+            <h4 className="center">Login</h4>
+            <p className="lead text-muted center">
+              Have you already created a account with us? 
+              
+              Then you can simply log in with your Username and Password.
+            </p>
 
             <form onSubmit={handleSubmit(this.onButtonSubmit.bind(this))}>
               <div>

@@ -6,13 +6,9 @@ import Login from './Login';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import registration from '../components/registrationform/Registration';
-import * as actions from '../actions';
+import * as actions from '../actions'; 
 
 class App extends Component{
-
-    componentDidMount(){
-        this.props.fetchCurrentUser();
-    }
     render(){
         return(
             <div>
@@ -32,4 +28,5 @@ class App extends Component{
     }
 }
 
-export default connect(null, actions)(App);
+
+export default App
