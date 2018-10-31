@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const express = require('express');
 
+
 module.exports = (app) => {
     app.use(session({
         secret: keys.COOKIE_SECRET_KEY,
@@ -14,7 +15,7 @@ module.exports = (app) => {
         },
         saveUninitialized: false
     }));
-
+    
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(passport.session());
@@ -23,7 +24,7 @@ module.exports = (app) => {
     mongoose.connect(keys.mongo_URI, {
         useNewUrlParser: true
     });
-
+    
     if (process.env.NODE_ENV === 'production') {
         app.use(express.static('client/dist'));
         app.get('*', (req, res) => {

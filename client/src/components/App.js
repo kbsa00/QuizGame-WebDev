@@ -4,9 +4,9 @@ import Footer from './Footer';
 import Landing from './Landing';
 import Login from './Login'; 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {connect} from 'react-redux';
 import registration from '../components/registrationform/Registration';
-import * as actions from '../actions'; 
+
+
 
 class App extends Component{
     render(){
