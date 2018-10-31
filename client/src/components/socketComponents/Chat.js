@@ -15,7 +15,7 @@ class Chat extends Component {
       messages: []
     };
     
-    this.socket = io('localhost:3000');
+    this.socket = io(window.location.origin);
 
     this.socket.on('onRecieve_Message', function(data){
       Addingmsg(data)
