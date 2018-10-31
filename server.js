@@ -3,7 +3,6 @@ const socket = require('socket.io');
 const app = express();
 const http = require('http');
 
-
 require('./services/passport');
 require('./models/localUser');
 require('./middleware/appMiddlewares')(app);
