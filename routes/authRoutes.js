@@ -1,6 +1,6 @@
 let localUser = require('../models/localUser');
 const passport = require('passport');
-let {checkAuthentication} = require('../middleware/authenticationMiddleware');
+
 
 module.exports = (app) => {
     
@@ -45,10 +45,13 @@ module.exports = (app) => {
           });
     });
 
-    app.get('/api/current_user', checkAuthentication, (req, res) => {
+    app.get('/api/current_user', (req, res) => {
+        if(req.user){
         res.json({
             userId: req.user.id,
             username: req.user.username
         });
+        }
+        res.status(401).send();
     });
 }
