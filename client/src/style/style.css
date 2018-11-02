@@ -10,7 +10,8 @@ body{
 }
 
 .jumbotron{
-    background-image: url(https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0c4b5fcc53abd6158286dc86a9be4bee&auto=format&fit=crop&w=1050&q=80);
+    background-image: url(https://www.traceinternational.org/Uploads/BlogPostImages/Feb2_Blog-Email-Header_1.png);
+    height: 450px;
 }
 
 .btn-lg{
@@ -36,7 +37,17 @@ body{
     color: white;
 }
 
-.card{
-   height: 80%;
-   margin-left: 10px;
+
+.cardpic{
+    height: 150px;
+    widows: 150px;
+}
+
+.gamemode{
+    width: 400px;
+}
+
+.chat{
+    height: 80%;
+    margin-left: 10px;
 }

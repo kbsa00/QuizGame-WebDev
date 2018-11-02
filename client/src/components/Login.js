@@ -33,7 +33,7 @@ class Login extends Component {
         <div className="row">
       
          <div className="col s6 offset-s3 z-depth-1" id="panel">
-            <h4 className="center">Login</h4>
+            <h4 className="center">Login at Quiznet</h4>
             <p className="lead text-muted center">
               Have you already created a account with us? 
               

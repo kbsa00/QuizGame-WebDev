@@ -15,7 +15,7 @@ class Chat extends Component {
       messages: []
     };
     
-    this.socket = io(window.location.origin);
+    this.socket = io('localhost:3000');
 
     this.socket.on('onRecieve_Message', function(data){
       Addingmsg(data)
@@ -48,7 +48,7 @@ class Chat extends Component {
       <div className= 'chatBox'>       
           <div className='row'>
           
-            <div className='card blue-grey darken-1'>
+            <div className='card chat blue-grey darken-1'>
               <div className='card-body'> 
                 <span className='card-title'>Global Chat for players</span>
               </div>

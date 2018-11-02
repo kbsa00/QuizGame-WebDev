@@ -26,8 +26,7 @@ class Header extends Component{
             <div>
                 <nav>
                     <div className="nav-wrapper">
-                        <Link to="/" className="brand-logo center">APP NAME</Link>
-
+                        <Link to="/" className="brand-logo center">QUIZZNET</Link>
                         <ul className="right">
                            {this.renderingContent()}
                         </ul>

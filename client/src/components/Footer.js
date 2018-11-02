@@ -17,7 +17,7 @@ export default function Footer() {
     </div>
     <div className="footer-copyright">
       <div className="container">
-      © 2018 - App Name
+      © 2018 - Quizznet
       <a className="grey-text text-lighten-4 right" href="#!">Contact us?</a>
       </div>
     </div>
