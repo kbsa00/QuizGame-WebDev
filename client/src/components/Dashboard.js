@@ -1,7 +1,38 @@
 import React, { Component } from 'react'; 
 import Chat from './socketComponents/Chat';
 import GameMode from './socketComponents/GameMode';
-class Dashboard extends Component {  
+import axios from 'axios'; 
+import io from 'socket.io-client'; 
+
+
+class Dashboard extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      MatchToken: ''
+    }
+    
+    this.socket = io('localhost:3000'); 
+  }
+
+  startMatch(){
+    axios.get('/api/findGame')
+    .then(res => {
+      this.setState({MatchToken: res.data.MatchIdentication});
+      console.log(this.state.MatchToken);
+
+      this.socket.emit('findGame',{
+        MatchToken: this.state.MatchToken, 
+        user: this.props.username
+      });
+  
+      this.socket.on(this.state.MatchToken, (res) => console.log(res)); 
+      
+    })
+    .catch(console.error());
+  }
+  
   render() {
     return (
       <div>
@@ -18,7 +49,7 @@ class Dashboard extends Component {
                 </div>
                 
             </div> 
-           <GameMode/>
+            <button className="btn btn-primary form-control" onClick={this.startMatch.bind(this)}>Send</button>
       </div>
     );
   }
