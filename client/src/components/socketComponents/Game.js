@@ -28,8 +28,6 @@ class Game extends Component {
                 this.setState({message: "Click find game, to play"})
             }
         });
-
-        console.log('componentdidmount');
     }
 
     renderPage(){
@@ -48,7 +46,6 @@ class Game extends Component {
             let startgameBtn;
             if(this.props.auth.username === this.state.partyleader){
                startgameBtn = <button className="btn btn-primary btn-lg center" onClick={this.start.bind(this)}>Start Game</button>
-               //this.setState({message: "Click start game when you want to start!"})
             }
            
 
@@ -78,6 +75,7 @@ class Game extends Component {
           this.setState({partyleader: res.data.PartyLeader});
 
           console.log(this.state.MatchToken);
+          this.setState({message: "Wait for the party leader to start"});
     
           this.socket.emit('findGame',{
             MatchToken: this.state.MatchToken, 
