@@ -13,7 +13,8 @@ class Game extends Component {
             MatchToken: '',
             message: '',
             players: 0,
-            partyleader: 'No one is Party leader. Please find game first!'
+            partyleader: 'No one is Party leader. Please find game first!',
+            errormsg: ''
         };
 
         this.socket = io('localhost:3000'); 
@@ -27,6 +28,8 @@ class Game extends Component {
                 this.setState({message: "Click find game, to play"})
             }
         });
+
+        console.log('componentdidmount');
     }
 
     renderPage(){
@@ -41,19 +44,28 @@ class Game extends Component {
                 </div>
             )
         }else{
+
+            let startgameBtn;
+            if(this.props.auth.username === this.state.partyleader){
+               startgameBtn = <button className="btn btn-primary btn-lg center" onClick={this.start.bind(this)}>Start Game</button>
+               //this.setState({message: "Click start game when you want to start!"})
+            }
+           
+
             return (
                 <div className="container">
                       <div className="textbox">
                           <h4 className="center">{this.state.message}</h4>
-                          <h7><b>Partyleader: {this.state.partyleader}</b></h7>
+                          <h6 className="center"><b>Partyleader: {this.state.partyleader}</b></h6>
                       </div>
           
                       <div className="row 2 center">
-                          <button className="btn btn-primary btn-lg center" onClick={this.start.bind(this)}>Start Game</button>
+                          {startgameBtn}
                           <button className="btn btn-primary btn-lg center" onClick={this.find.bind(this)}>Find Game</button>
-                          <h6>{"Amount of Players in this game: "+ this.state.players}</h6>
+                          <h6 className="right">{"Amount of Players in this game: "+ this.state.players}</h6>
                       </div>
                       
+                      <div className="red-text">{this.state.errormsg}</div>
                 </div>
               )
         }
@@ -77,23 +89,26 @@ class Game extends Component {
 
     start(){
         let value =  {MatchIdentication: this.state.MatchToken};
-        axios.post('/api/startGame',
-        value
-        )
-        .then(res =>{
+        
+        if(this.state.players > 1){
+            axios.post('/api/startGame',
+            value
+            )
+            .then(res =>{
             
-          if(res.data !== undefined){
-            console.log(res.data.errormsg);
-          }
-    
-        })
+            if(res.data !== undefined){
+                console.log(res.data.errormsg);
+            }
+            });
+        }else{
+            this.setState({errormsg: 'You cant start until there is 2 players or more'})
+        }
     }
 
   render() {
     return(
         <div>
             {this.renderPage()}
-
         </div>
     )
   }

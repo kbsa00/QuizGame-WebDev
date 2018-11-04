@@ -68,8 +68,8 @@ class Login extends Component {
               </div>
 
               <div className="red-text">
-              {this.state.error}
-          </div>
+                {this.state.error}
+              </div>
             </form>
          </div>
          </div>
