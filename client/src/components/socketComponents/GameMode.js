@@ -1,26 +1,36 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'; 
 
 class GameMode extends Component {
+
+  constructor(props){
+      super(props); 
+  }
+ 
+  start(){
+    this.props.history.push('/gamequiz'); 
+  }
+
   render() {
     return (
       <div className='container'>
         <div className="row">
             <div className="col s12 m7">
                 <div className="card gamemode">
-                    <div className="card-image">
-                        <img className="cardpic"src="https://static-cdn.jtvnw.net/jtv_user_pictures/e91a3dcf-c15a-441a-b369-996922364cdc-profile_image-300x300.png" />
-                        <span className="card-title">REGULAR GAME</span>
+                    <div className="header">
+                        <h1 className="card-title center">REGULAR GAME</h1>
                     </div>
 
                     <div className="card-content">
                         <p>
-                            I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.
+                           Are you ready to play a round of Multiplayer Quiz? All you need to do is click the Start button
+                           and you are able to play against other players on Quizznet! 
+                           What are you waiting for?
                         </p>
                     </div>
 
                     <div className="card-action">
-                        <a href="/">This is a link</a>
+                        <button className="btn btn-primary form-control" onClick={this.start.bind(this)}>Start Game</button>
                     </div>
                 </div>
             </div>
@@ -30,5 +40,4 @@ class GameMode extends Component {
   }
 }
 
-
-export default GameMode;
+export default withRouter(GameMode);

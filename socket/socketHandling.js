@@ -5,7 +5,7 @@ module.exports = (io) => {
             console.log(socket.id)
             console.log('disconnected');
         });
-
+        
         socket.on('onSending_Message', (msg) => {
             io.emit('onRecieve_Message', msg);
         });
@@ -18,7 +18,4 @@ module.exports = (io) => {
             console.log(`Amount of people in the room ${room.length} - ${data.MatchToken}`);
         });
     });
-
-
-
 };

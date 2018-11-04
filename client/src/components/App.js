@@ -5,6 +5,7 @@ import Landing from './Landing';
 import Login from './Login'; 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import registration from '../components/registrationform/Registration';
+import Game from './socketComponents/Game';
 
 
 
@@ -19,6 +20,7 @@ class App extends Component{
                     <Route exact path='/' component={Landing}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={registration}/>
+                    <Route path='/GameQuiz' component={Game}/>
                  </Switch>
                  </div>
                 </BrowserRouter>

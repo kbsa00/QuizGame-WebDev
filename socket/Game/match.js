@@ -1,13 +1,14 @@
 const randomToken = require('rand-token');
-
 class Match {
     constructor() {
         this.matches = [];
+        this.creatorToMatch = new Map();
     }
 
-    genereteMatchId() {
+    genereteMatchId(username) {
         let genereteMatch = randomToken.generate(16);
         this.matches.push(genereteMatch);
+        this.creatorToMatch.set(username, genereteMatch);
         return genereteMatch;
     }
 
@@ -15,24 +16,24 @@ class Match {
         if (this.matches.length === 0) {
             return false;
         } else {
-            for(let i = 0; i < this.matches.length; i++){
-                if(this.matches[i] !== undefined){
-                    return this.matches[i]; 
+            for (let i = 0; i < this.matches.length; i++) {
+                if (this.matches[i] !== undefined) {
+                    return this.matches[i];
                 }
             }
         }
     }
 
-    printAllMatches(){
+    printAllMatches() {
         console.log(`ALL MATCHES: ${this.matches}`);
     }
 
-    deleteMatchId(matchId) {
-        if (this.matches.include(matchId)) {
+    StartingMatch(matchToken, username) {
+        if (this.matches.includes(matchToken) && this.creatorToMatch.get(username) === matchToken) {
             this.matches = this.matches.filter(match => {
-                return match !== matchId
+                return match !== matchToken
             });
-
+            this.creatorToMatch.delete(username);
             return true;
         }
         return false;

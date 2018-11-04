@@ -48,6 +48,15 @@ body{
 }
 
 .chat{
-    height: 80%;
+    height: 40%;
     margin-left: 10px;
 }
+
+.header{
+    background: #14c9c0;
+}
+
+.textbox{
+    height: 40%;
+}
+

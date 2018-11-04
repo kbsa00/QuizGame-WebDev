@@ -8,29 +8,8 @@ import io from 'socket.io-client';
 class Dashboard extends Component {
 
   constructor(props){
-    super(props);
-    this.state = {
-      MatchToken: ''
-    }
-    
-    this.socket = io('localhost:3000'); 
-  }
-
-  startMatch(){
-    axios.get('/api/findGame')
-    .then(res => {
-      this.setState({MatchToken: res.data.MatchIdentication});
-      console.log(this.state.MatchToken);
-
-      this.socket.emit('findGame',{
-        MatchToken: this.state.MatchToken, 
-        user: this.props.username
-      });
-  
-      this.socket.on(this.state.MatchToken, (res) => console.log(res)); 
-      
-    })
-    .catch(console.error());
+    super(props);  
+    //this.socket = io('localhost:3000'); 
   }
   
   render() {
@@ -47,12 +26,52 @@ class Dashboard extends Component {
                     sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </b>
                 </div>
-                
             </div> 
-            <button className="btn btn-primary form-control" onClick={this.startMatch.bind(this)}>Send</button>
+            <div className="row 2">
+              <Chat username={this.props.username}/>
+              <GameMode/>
+            </div>
       </div>
     );
   }
 }
 
 export default Dashboard;
+
+
+/**
+ *   findMatch(){
+    axios.get('/api/findGame')
+    .then(res => {
+      this.setState({MatchToken: res.data.MatchIdentication});
+      console.log(this.state.MatchToken);
+
+      this.socket.emit('findGame',{
+        MatchToken: this.state.MatchToken, 
+        user: this.props.username
+      });
+  
+      this.socket.on(this.state.MatchToken, (res) => console.log(res)); 
+      
+    })
+    .catch(console.error());
+  }
+
+
+  startMatch(){
+    let value =  {MatchIdentication: this.state.MatchToken};
+    axios.post('/api/startGame',
+    value
+    )
+    .then(res =>{
+        
+      if(res.data !== undefined){
+        console.log(res.data.errormsg);
+      }
+
+    })
+    
+  }
+ * 
+ * 
+ */
