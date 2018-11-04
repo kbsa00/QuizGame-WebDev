@@ -53,7 +53,7 @@ class Chat extends Component {
                 <span className='card-title'>Global Chat for players</span>
               </div>
 
-                <div>
+                <div className="allmessages">
                   {this.renderMessages()}
                 </div>
 

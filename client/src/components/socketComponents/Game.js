@@ -11,7 +11,9 @@ class Game extends Component {
         super(props);
         this.state = {
             MatchToken: '',
-            message: ''
+            message: '',
+            players: 0,
+            partyleader: 'No one is Party leader. Please find game first!'
         };
 
         this.socket = io('localhost:3000'); 
@@ -22,12 +24,14 @@ class Game extends Component {
             if(!this.props.auth){
                 this.setState({message: "Please login to play"}); 
             }else{
-                this.setState({message: "Click Start game to begin!"})
+                this.setState({message: "Click find game, to play"})
             }
-        })
+        });
     }
 
     renderPage(){
+
+        this.socket.on(this.state.MatchToken, (res) =>  this.setState({players: res})); 
         if(!this.props.auth){
             return(
                 <div className="container">
@@ -41,12 +45,13 @@ class Game extends Component {
                 <div className="container">
                       <div className="textbox">
                           <h4 className="center">{this.state.message}</h4>
+                          <h7><b>Partyleader: {this.state.partyleader}</b></h7>
                       </div>
           
                       <div className="row 2 center">
                           <button className="btn btn-primary btn-lg center" onClick={this.start.bind(this)}>Start Game</button>
                           <button className="btn btn-primary btn-lg center" onClick={this.find.bind(this)}>Find Game</button>
-                          
+                          <h6>{"Amount of Players in this game: "+ this.state.players}</h6>
                       </div>
                       
                 </div>
@@ -58,15 +63,14 @@ class Game extends Component {
         axios.get('/api/findGame')
         .then(res => {
           this.setState({MatchToken: res.data.MatchIdentication});
+          this.setState({partyleader: res.data.PartyLeader});
+
           console.log(this.state.MatchToken);
     
           this.socket.emit('findGame',{
             MatchToken: this.state.MatchToken, 
             user: this.props.auth.username
-          });
-      
-          this.socket.on(this.state.MatchToken, (res) => console.log(res)); 
-          
+          });      
         })
         .catch(console.error());
     }
@@ -89,8 +93,8 @@ class Game extends Component {
     return(
         <div>
             {this.renderPage()}
+
         </div>
-        
     )
   }
 }

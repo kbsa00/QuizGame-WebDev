@@ -51,6 +51,10 @@ body{
     height: 40%;
     margin-left: 10px;
 }
+.allmessages{
+    height: 100px; 
+    overflow-y : auto;   
+}
 
 .header{
     background: #14c9c0;

@@ -3,12 +3,14 @@ class Match {
     constructor() {
         this.matches = [];
         this.creatorToMatch = new Map();
+        this.matchToCreator = new Map();
     }
 
     genereteMatchId(username) {
         let genereteMatch = randomToken.generate(16);
         this.matches.push(genereteMatch);
         this.creatorToMatch.set(username, genereteMatch);
+        this.matchToCreator.set(genereteMatch, username); 
         return genereteMatch;
     }
 
@@ -28,12 +30,18 @@ class Match {
         console.log(`ALL MATCHES: ${this.matches}`);
     }
 
+    getPartyLeaderMatch(matchToken){
+        return this.matchToCreator.get(matchToken);
+    }
+
     StartingMatch(matchToken, username) {
         if (this.matches.includes(matchToken) && this.creatorToMatch.get(username) === matchToken) {
             this.matches = this.matches.filter(match => {
                 return match !== matchToken
             });
+
             this.creatorToMatch.delete(username);
+            this.matchToCreator.delete(matchToken);
             return true;
         }
         return false;

@@ -15,6 +15,7 @@ module.exports = (io) => {
             socket.join(data.MatchToken);
             io.in(data.MatchToken).emit(data.MatchToken, `${data.user} has joined the room`);
             let room = io.sockets.adapter.rooms[data.MatchToken];
+            io.in(data.MatchToken).emit(data.MatchToken, room.length);
             console.log(`Amount of people in the room ${room.length} - ${data.MatchToken}`);
         });
     });

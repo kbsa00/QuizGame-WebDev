@@ -11,15 +11,20 @@ module.exports = (app) => {
         let matchId = match.checkingForMatches();
         if (matchId === false) {
             let generetedMatch = match.genereteMatchId(req.user.username);
+            let matchCreator = match.getPartyLeaderMatch(generetedMatch);
+
             match.printAllMatches(); 
 
             res.json({
-                MatchIdentication: generetedMatch
+                MatchIdentication: generetedMatch,
+                PartyLeader: matchCreator
             });
         } else {
             match.printAllMatches();
+            let matchCreator = match.getPartyLeaderMatch(matchId)
             res.json({
-                MatchIdentication: matchId
+                MatchIdentication: matchId,
+                PartyLeader: matchCreator
             });
         }
     });
