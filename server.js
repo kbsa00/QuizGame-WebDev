@@ -14,4 +14,4 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT);
 console.log(`Now listening to port ${PORT}`);
 const io = socket(server);
-require('./socket/socketHandling')(io); 
+require('./socket/socketHandling')(io);

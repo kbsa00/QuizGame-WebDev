@@ -17,7 +17,11 @@ class Game extends Component {
             errormsg: ''
         };
 
-        this.socket = io('localhost:3000'); 
+        if(process.env.NODE_ENV === 'development'){
+            this.socket = io('localhost:3000'); 
+        }else if(process.env.NODE_ENV === 'production'){
+            this.socket = io('/');
+        }
     }
     componentDidMount(){
         this.props.fetchCurrentUser()

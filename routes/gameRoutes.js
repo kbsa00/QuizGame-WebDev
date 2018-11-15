@@ -28,7 +28,7 @@ module.exports = (app) => {
             });
         }
     });
-
+    
     app.post('/api/startGame', checkAuthentication, (req, res) => {
         if(match.StartingMatch(req.body.MatchIdentication, req.user.username)){
             res.status(200).send(); 
