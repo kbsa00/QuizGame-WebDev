@@ -18,5 +18,11 @@ module.exports = (io) => {
             io.in(data.MatchToken).emit(data.MatchToken, room.length);
             console.log(`Amount of people in the room ${room.length} - ${data.MatchToken}`);
         });
+
+        socket.on('startGame', (data) => {
+            io.emit('starting_game', {
+                gametoken: data.MatchToken
+            });
+        });
     });
 };

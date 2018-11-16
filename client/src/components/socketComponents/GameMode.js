@@ -8,7 +8,7 @@ class GameMode extends Component {
   }
  
   start(){
-    this.props.history.push('/gamequiz'); 
+    this.props.history.push('/gamestart'); 
   }
 
   render() {

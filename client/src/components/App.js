@@ -6,8 +6,7 @@ import Login from './Login';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import registration from '../components/registrationform/Registration';
 import Game from './socketComponents/Game';
-
-
+import GameQuiz from './socketComponents/GameQuiz'; 
 
 class App extends Component{
     render(){
@@ -20,7 +19,8 @@ class App extends Component{
                     <Route exact path='/' component={Landing}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={registration}/>
-                    <Route path='/GameQuiz' component={Game}/>
+                    <Route path='/gamestart' component={Game}/>
+                    <Route path='/gamequiz' component={GameQuiz}/>
                  </Switch>
                  </div>
                 </BrowserRouter>

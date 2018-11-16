@@ -16,10 +16,10 @@ module.exports = (app) => {
                     res.status(200).send();
                 })
                 .catch(err => {
-                    res.status(422).send();
+                    res.status(500).send();
                 });
         }else{
-            res.status(400).send();
+            res.status(422).send();
         }
     });
 
@@ -47,7 +47,7 @@ module.exports = (app) => {
           });
     });
 
-    app.get('/api/current_user', checkAuthentication, (req, res) => {
+    app.get('/api/current_user', checkAuthentication, (req, res) => { 
         res.json({
             userId: req.user.id,
             username: req.user.username

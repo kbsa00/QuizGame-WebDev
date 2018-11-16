@@ -3,6 +3,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import {connect} from 'react-redux';
 import {fetchCurrentUser} from '../../actions/index';
+import {withRouter} from 'react-router-dom'; 
 
 
 class Game extends Component {
@@ -22,7 +23,18 @@ class Game extends Component {
         }else if(process.env.NODE_ENV === 'production'){
             this.socket = io('/');
         }
+
+        this.socket.on('starting_game', (data) =>{
+            if(data.gametoken === this.state.MatchToken){
+                console.log('the game will now start');
+                this.props.history.push({
+                    pathname: '/gamequiz',
+                    state: {matchtoken: this.state.MatchToken}
+                });
+            }
+        })
     }
+
     componentDidMount(){
         this.props.fetchCurrentUser()
         .then(() =>{
@@ -41,7 +53,7 @@ class Game extends Component {
             return(
                 <div className="container">
                     <div className="textbox">
-                        <h4 className="center">{this.state.message}</h4>
+                        <h4 className="messagegame center">{this.state.message}</h4>
                     </div>    
                 </div>
             )
@@ -78,9 +90,8 @@ class Game extends Component {
           this.setState({MatchToken: res.data.MatchIdentication});
           this.setState({partyleader: res.data.PartyLeader});
 
-          console.log(this.state.MatchToken);
           this.setState({message: "Wait for the party leader to start"});
-    
+            
           this.socket.emit('findGame',{
             MatchToken: this.state.MatchToken, 
             user: this.props.auth.username
@@ -91,16 +102,20 @@ class Game extends Component {
 
     start(){
         let value =  {MatchIdentication: this.state.MatchToken};
-        
         if(this.state.players > 1){
             axios.post('/api/startGame',
             value
             )
             .then(res =>{
             
-            if(res.data !== undefined){
-                console.log(res.data.errormsg);
-            }
+                if(res.data !== undefined){
+                    console.log(res.data.errormsg);
+                }
+
+                this.socket.emit("startGame", {
+                    MatchToken: this.state.MatchToken
+                });
+
             });
         }else{
             this.setState({errormsg: 'You cant start until there is 2 players or more'})
@@ -120,4 +135,4 @@ function mapStateToProps(state){
     return{auth: state.auth};
 }
 
-export default connect(mapStateToProps, {fetchCurrentUser})(Game);
+export default withRouter(connect(mapStateToProps, {fetchCurrentUser})(Game));
