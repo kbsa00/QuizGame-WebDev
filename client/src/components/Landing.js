@@ -7,7 +7,7 @@ import {fetchCurrentUser} from '../actions/index';
 
 class Landing extends Component{
   
-  componentDidMount(){
+  componentWillMount(){
     this.props.fetchCurrentUser();
   }
 

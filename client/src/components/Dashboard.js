@@ -1,15 +1,14 @@
 import React, { Component } from 'react'; 
 import Chat from './socketComponents/Chat';
 import GameMode from './socketComponents/GameMode';
-import axios from 'axios'; 
-import io from 'socket.io-client'; 
+
 
 
 class Dashboard extends Component {
 
   constructor(props){
     super(props);  
-    //this.socket = io('localhost:3000'); 
+     
   }
   
   render() {

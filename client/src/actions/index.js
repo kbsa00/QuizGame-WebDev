@@ -6,9 +6,6 @@ import {
 } from './types';
 import axios from 'axios';
 
-
-
-
 export const UserloginAction = (values, history) => async (dispatch) => {
     try {
         const res = await axios.post('/api/login', values);
