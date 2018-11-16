@@ -7,12 +7,12 @@ import {fetchCurrentUser} from '../actions/index';
 
 class Landing extends Component{
   
-  componentWillMount(){
+  componentDidMount(){
     this.props.fetchCurrentUser();
   }
 
   renderComponent(){
-   
+    if(!this.props.auth){
       return(
         <div className="jumbotron">
         <div className="container">
@@ -35,8 +35,12 @@ class Landing extends Component{
   
         </div>  
       );
-    
-    
+    }
+    else{
+      return(
+        <Dashboard username={this.props.auth.username}/>
+      );
+    }
   }
 
   render(){
