@@ -5,6 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
 
 
@@ -21,7 +22,8 @@ module.exports = (app) => {
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(passport.session());
-  
+    app.use(cors());
+    
     mongoose.set('useCreateIndex', true);
     mongoose.connect(keys.mongo_URI, {
         useNewUrlParser: true

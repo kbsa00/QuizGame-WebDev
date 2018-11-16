@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Chat from './socketComponents/Chat';
 import GameMode from './socketComponents/GameMode';
 
-
-
 class Dashboard extends Component {
 
   constructor(props){
