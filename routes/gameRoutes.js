@@ -7,7 +7,7 @@ const match = new Match();
 module.exports = (app) => {
 
     app.get('/api/findGame', checkAuthentication, (req, res) => {
-        
+
         let matchId = match.checkingForMatches();
         if (matchId === false) {
             let generetedMatch = match.genereteMatchId(req.user.username);
