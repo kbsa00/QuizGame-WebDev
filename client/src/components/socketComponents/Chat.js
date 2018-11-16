@@ -15,8 +15,12 @@ class Chat extends Component {
       messages: []
     };
     
-    this.socket = io('localhost:3000');
-
+    if(process.env.NODE_ENV === 'production'){
+      this.socket = io('/')
+    }else if(process.env.NODE_ENV === 'development'){
+      this.socket = io('localhost:3000');
+    }
+  
     this.socket.on('onRecieve_Message', function(data){
       Addingmsg(data)
     });
