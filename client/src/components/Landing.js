@@ -37,9 +37,9 @@ class Landing extends Component{
       );
     }
     else{
-      return(
-        <Dashboard username={this.props.auth.username}/>
-      );
+     // return(
+        //<Dashboard username={this.props.auth.username}/>
+      //);
     }
   }
 
