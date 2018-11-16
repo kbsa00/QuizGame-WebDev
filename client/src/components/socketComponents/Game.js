@@ -26,7 +26,6 @@ class Game extends Component {
 
         this.socket.on('starting_game', (data) =>{
             if(data.gametoken === this.state.MatchToken){
-                console.log('the game will now start');
                 this.props.history.push({
                     pathname: '/gamequiz',
                     state: {matchtoken: this.state.MatchToken}

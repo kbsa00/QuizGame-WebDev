@@ -12,7 +12,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-            <div className="jumbotron">
+            <div className="headerpage jumbotron">
                 <div className="container">
                     <h1 className="display-3">Welcome back,{' '+this.props.username}</h1>
                     <b> 

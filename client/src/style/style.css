@@ -9,7 +9,7 @@ body{
     background-color: #455a64;  
 }
 
-.jumbotron{
+.headerpage{
     background-image: url(https://www.traceinternational.org/Uploads/BlogPostImages/Feb2_Blog-Email-Header_1.png);
     height: 450px;
 }
@@ -66,4 +66,22 @@ body{
 
 .messagegame {
     margin-top: 200px;
+}
+
+.questionbox{
+    background-color: #455a64;
+    height: 100px;
+}
+
+.something{
+    margin-top: 50px;
+    border: 1px solid #455a64;
+    border-radius: 10px;
+    background: url(https://www.ericroy.ca/wp-content/uploads/2017/09/question-marks-background-5048.jpeg)
+}
+
+.btn-large{
+    margin-right: 20px;
+    margin-top:20px;
+    border-radius:10px;
 }

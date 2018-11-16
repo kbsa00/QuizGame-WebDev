@@ -14,7 +14,7 @@ class Landing extends Component{
   renderComponent(){
     if(!this.props.auth){
       return(
-        <div className="jumbotron">
+        <div className="headerpage jumbotron">
         <div className="container">
           <h1 className="display-3">Welcome to QUIZZNET</h1>
           <b><p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
