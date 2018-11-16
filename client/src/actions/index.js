@@ -26,6 +26,7 @@ export const UserloginAction = (values, history) => async (dispatch) => {
 export const fetchCurrentUser = () => async(dispatch) => {
     try{
         const res = await axios.get('/api/current_user');
+        console.log(res.data); 
         dispatch({
             type: FETCH_USER,
             payload: res.data
