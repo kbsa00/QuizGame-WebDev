@@ -38,4 +38,20 @@ module.exports = (app) => {
             }); 
         }
     });
+
+    app.post('/api/checkGameExist', checkAuthentication, (req,res) => {
+        let matchtoken = req.body.MatchIdentication;
+        matchtoken = matchtoken.substring(1);
+
+        let answer = match.checkMatchExist(matchtoken);
+        console.log(answer);
+
+        if(answer){
+            res.json({
+                matchtoken: matchtoken
+            });
+        }else{
+            res.status(401).send();
+        }
+    });
 };

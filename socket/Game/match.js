@@ -2,6 +2,7 @@ const randomToken = require('rand-token');
 class Match {
     constructor() {
         this.matches = [];
+        this.onGoingMatches = [];
         this.creatorToMatch = new Map();
         this.matchToCreator = new Map();
     }
@@ -40,11 +41,16 @@ class Match {
                 return match !== matchToken
             });
 
+            this.onGoingMatches.push(matchToken);
             this.creatorToMatch.delete(username);
             this.matchToCreator.delete(matchToken);
             return true;
         }
         return false;
+    }
+
+    checkMatchExist(matchToken){
+        return (this.onGoingMatches.indexOf(matchToken) > -1);
     }
 }
 

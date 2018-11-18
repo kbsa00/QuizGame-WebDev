@@ -1,3 +1,5 @@
+let questions = require('./Game/QuestionGenerate');
+
 module.exports = (io) => {
     io.on('connection', function (socket) {
 
@@ -5,7 +7,7 @@ module.exports = (io) => {
             console.log(socket.id)
             console.log('disconnected');
         });
-        
+
         socket.on('onSending_Message', (msg) => {
             io.emit('onRecieve_Message', msg);
         });
@@ -23,6 +25,13 @@ module.exports = (io) => {
             io.emit('starting_game', {
                 gametoken: data.MatchToken
             });
+        });
+
+        socket.on('quiz', (data) => {
+            console.log(`server ${data.matchtoken}`);
+            io.emit('game', questions.GetQuestion());
+            //io.in(data.matchtoken).emit(data.matchtoken, {message: 'yo'});
+            //io.in(data.matchtoken).emit(data.matchtoken, questions.GetQuestion());
         });
     });
 };

@@ -26,10 +26,7 @@ class Game extends Component {
 
         this.socket.on('starting_game', (data) =>{
             if(data.gametoken === this.state.MatchToken){
-                this.props.history.push({
-                    pathname: '/gamequiz',
-                    state: {matchtoken: this.state.MatchToken}
-                });
+                this.props.history.push(`/gamequiz:${this.state.MatchToken}`);
             }
         })
     }
@@ -43,6 +40,13 @@ class Game extends Component {
                 this.setState({message: "Click find game, to play"})
             }
         });
+    }
+
+    componentWillUnmount(){
+        this.socket.close();
+       // this.socket.off('findGame')
+        //this.socket.off('starting_game');
+        //this.socket.off(this.state.MatchToken);
     }
 
     renderPage(){
