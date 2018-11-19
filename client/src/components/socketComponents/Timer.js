@@ -25,14 +25,16 @@ class Timer extends Component {
           clearInterval(this.interval);
         }
         
-        if(this.state.CountDown === 0){
-            this.setState({
-                CountDown: 10
-            });
-            this.setState({QuestionNumber: this.state.QuestionNumber + 1});
-            clearInterval(this.interval);
-            this.socket.emit('quiz', "new_question"); 
-            this.interval = setInterval(this.Timer.bind(this), 1000);
+        if(this.state.QuestionNumber < 10){
+            if(this.state.CountDown === 0){
+                this.setState({
+                    CountDown: 10
+                });
+                this.setState({QuestionNumber: this.state.QuestionNumber + 1});
+                clearInterval(this.interval);
+                this.socket.emit('quiz', "new_question"); 
+                this.interval = setInterval(this.Timer.bind(this), 1000);
+            }
         }
 
         this.props.data(this.state.CountDown);
