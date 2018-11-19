@@ -3,6 +3,8 @@ import io from 'socket.io-client';
 import axios from 'axios'; 
 import shuffle from 'shuffle-array';
 import Timer from './Timer';
+import {connect} from 'react-redux';
+import _ from 'lodash';
 
 class GameQuiz extends Component {
 
@@ -18,6 +20,8 @@ class GameQuiz extends Component {
         your_answer: '',
         timer: 0,
         points: 0,
+        questionnumber: 0,
+        roundrank:  [],
         error: false
     };
     
@@ -40,6 +44,7 @@ class GameQuiz extends Component {
         this.setState({your_answer: ''});
     }
 
+    
     this.buttonClick = this.buttonClick.bind(this);
   }
 
@@ -47,8 +52,11 @@ class GameQuiz extends Component {
      this.setState({timer: value});
   }
 
+  updateQuestionNumber(value){
+      console.log(value);
+      this.setState({questionnumber: value});
+  }
   componentDidMount(){
-    
     const {
         match
     } = this.props.match.params
@@ -62,10 +70,7 @@ class GameQuiz extends Component {
             this.setState({
                 matchtoken: res.data.matchtoken
             });
-
-            this.socket.on(this.state.matchtoken, (res) =>{
-                console.log(res);
-            });
+            console.log('something');
         }).catch(err => this.setState({
             error: true
         }));
@@ -75,18 +80,41 @@ class GameQuiz extends Component {
   buttonClick(e){
     this.setState({your_answer: e.target.id});
     if(this.state.correct_answer === e.target.id){
-        console.log(this.state.timer);
+
         if(this.state.points === 0){
             this.setState({points: this.state.timer});
         }else{
             this.setState({points: this.state.points * this.state.timer});
         }
-       
     }
   }
 
+  /*
+  renderRanks(ranks){
+    console.log(this.state.roundrank);
+    this.state.roundrank.map((obj) => {
+        return(
+            <div>
+                <h5>{obj.username + ' ' + obj.points }</h5>
+            </div>
+        );
+    });
+  }
+  */
   render() {
-    if(!this.state.error){
+
+    if(this.state.questionnumber === 10 && this.state.timer === 0){
+        /*this.socket.emit('rank', {matchtoken: this.state.matchtoken, username: this.props.auth.username, points: this.state.points});
+          return(
+            <div className="container">
+                <h2 className="center">THE GAME IS FUCKING OVER BITCH</h2>
+                {this.renderRanks()}
+                
+            </div>
+          );
+          */
+    }
+    else if(!this.state.error){
         return(
           <div className="container">
               <h6 className="center">{`Your points ${this.state.points}`}</h6>
@@ -97,7 +125,7 @@ class GameQuiz extends Component {
                       <h3 className="questiontext center">{this.state.question}</h3>
                   </div>
           
-              <div><Timer data={this.updateTimer.bind(this)}/></div>
+              <div><Timer data={this.updateTimer.bind(this)} number={this.updateQuestionNumber.bind(this)}/></div>
   
               <div>
                   <div className="row">
@@ -124,5 +152,8 @@ class GameQuiz extends Component {
   }
 }
 
+function mapStateToProps(state){
+    return{auth: state.auth};
+}
 
-export default GameQuiz; 
+export default connect(mapStateToProps)(GameQuiz); 

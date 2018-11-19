@@ -30,5 +30,9 @@ module.exports = (io) => {
         socket.on('quiz', (data) => {
             if(data === 'new_question') io.emit('game', questions.GetQuestion());
         });
+
+        socket.on('rank', (data) => {
+            io.emit(data.matchtoken, {username: data.username, points: data.points});
+        });
     });
 };

@@ -6,7 +6,8 @@ class Timer extends Component {
         super(props);
         this.state = {
             CountDown: 1,
-            QuestionNumber: 0
+            QuestionNumber: 0, 
+            gameIsOver: false
         };
 
         if(process.env.NODE_ENV === 'production'){
@@ -21,6 +22,7 @@ class Timer extends Component {
           CountDown: this.state.CountDown - 1
         }); 
         this.props.data(this.state.CountDown);
+       // this.props.number(this.state.QuestionNumber);
 
         if(this.state.CountDown < 1) { 
           clearInterval(this.interval);
@@ -37,6 +39,9 @@ class Timer extends Component {
                 this.socket.emit('quiz', "new_question"); 
                 this.interval = setInterval(this.Timer.bind(this), 1000);
             }
+        }else if(this.state.QuestionNumber === 10 && this.state.gameIsOver === false){
+            this.props.number(this.state.QuestionNumber);
+            this.setState({gameIsOver: true});
         }
 
         
