@@ -44,15 +44,11 @@ class GameQuiz extends Component {
   }
 
   updateTimer(value){
-      return () => {
-          this.setState({
-              timer: value
-          });
-      }
+     this.setState({timer: value});
   }
 
   componentDidMount(){
-    console.log(this.state.timer);
+    
     const {
         match
     } = this.props.match.params
@@ -78,9 +74,14 @@ class GameQuiz extends Component {
 
   buttonClick(e){
     this.setState({your_answer: e.target.id});
-    
     if(this.state.correct_answer === e.target.id){
-        this.setState({points: this.state.points + 1});
+        console.log(this.state.timer);
+        if(this.state.points === 0){
+            this.setState({points: this.state.timer});
+        }else{
+            this.setState({points: this.state.points * this.state.timer});
+        }
+       
     }
   }
 
@@ -91,6 +92,7 @@ class GameQuiz extends Component {
               <h6 className="center">{`Your points ${this.state.points}`}</h6>
               <h5 className="center">Category: {this.state.category}</h5>
               <h6 className="center">{"Your answer: " + this.state.your_answer}</h6>
+              <h6 className="center">Corect answer is: {' '} {this.state.your_answer ? this.state.correct_answer : ''}</h6>
                   <div className="something jumbotron">
                       <h3 className="questiontext center">{this.state.question}</h3>
                   </div>

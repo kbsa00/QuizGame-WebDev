@@ -20,6 +20,7 @@ class Timer extends Component {
         this.setState({
           CountDown: this.state.CountDown - 1
         }); 
+        this.props.data(this.state.CountDown);
 
         if(this.state.CountDown < 1) { 
           clearInterval(this.interval);
@@ -30,6 +31,7 @@ class Timer extends Component {
                 this.setState({
                     CountDown: 10
                 });
+                
                 this.setState({QuestionNumber: this.state.QuestionNumber + 1});
                 clearInterval(this.interval);
                 this.socket.emit('quiz', "new_question"); 
@@ -37,7 +39,7 @@ class Timer extends Component {
             }
         }
 
-        this.props.data(this.state.CountDown);
+        
     }
     
       componentDidMount() {
@@ -48,7 +50,7 @@ class Timer extends Component {
     }
       
     render() {
-        
+       
         return(
             <div className="container">
                 <h5 className="center">{`Question: ${this.state.QuestionNumber}/10`}</h5>
