@@ -28,10 +28,7 @@ module.exports = (io) => {
         });
 
         socket.on('quiz', (data) => {
-            console.log(`server ${data.matchtoken}`);
-            io.emit('game', questions.GetQuestion());
-            //io.in(data.matchtoken).emit(data.matchtoken, {message: 'yo'});
-            //io.in(data.matchtoken).emit(data.matchtoken, questions.GetQuestion());
+            if(data === 'new_question') io.emit('game', questions.GetQuestion());
         });
     });
 };

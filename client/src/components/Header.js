@@ -14,8 +14,10 @@ class Header extends Component{
                 ]
             default: 
             return [
+                <li key="3">User: {this.props.auth.username}</li>,
                 <li key="1"><a href="/api/logout">Logout</a></li>,
-                <li key="2"><Link to="Scoreboard">Scoreboard</Link></li>
+                <li key="2"><Link to="Scoreboard">Scoreboard</Link></li>,
+              
             ]
         }
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios'; 
 import shuffle from 'shuffle-array';
+import Timer from './Timer';
 
 class GameQuiz extends Component {
 
@@ -13,7 +14,8 @@ class GameQuiz extends Component {
         question: '',
         category: '',
         answers: [],
-        correct_answer: '', 
+        correct_answer: '',
+        your_answer: '',
         error: false
     };
     
@@ -22,15 +24,7 @@ class GameQuiz extends Component {
     }else if(process.env.NODE_ENV === 'production'){
         this.socket = io('/');
     }
-
-    const {
-        match
-    } = this.props.match.params
-
-    let matchid = match.substring(1);
     
-    this.socket.emit('quiz', {matchtoken: matchid});
-   
     this.socket.on('game', (res) => {
         addingStates(res);
     });
@@ -41,6 +35,7 @@ class GameQuiz extends Component {
         this.setState({answers:[...res.incorrect_answers, res.correct_answer]});
         this.setState({correct_answer: res.correct_answer});
         shuffle(this.state.answers);
+        this.setState({your_answer: ''});
     }
 
     this.buttonClick = this.buttonClick.bind(this); 
@@ -74,7 +69,7 @@ class GameQuiz extends Component {
 
   buttonClick(e){
     console.log(e.target.id);
-
+    this.setState({your_answer: e.target.id});
   }
 
   render() {
@@ -82,19 +77,20 @@ class GameQuiz extends Component {
         return(
           <div className="container">
               <h5 className="center">Category: {this.state.category}</h5>
+              <h6 className="center">{"Your answer: " + this.state.your_answer}</h6>
                   <div className="something jumbotron">
                       <h3 className="questiontext center">{this.state.question}</h3>
                   </div>
           
-              <div><h5 className="center">TIMER</h5></div>
+              <div><Timer/></div>
   
               <div>
                   <div className="row">
-                      <button className="btn-large col" onClick={this.buttonClick} id={this.state.answers[0]}>{this.state.answers[0]}</button>
-                      <button className="btn-large col" onClick={this.buttonClick} id={this.state.answers[1]}>{this.state.answers[1]}</button>
+                      <button className="btn-large col" disabled={this.state.your_answer} onClick={this.buttonClick} id={this.state.answers[0]}>{this.state.answers[0]}</button>
+                      <button className="btn-large col" disabled={this.state.your_answer} onClick={this.buttonClick} id={this.state.answers[1]}>{this.state.answers[1]}</button>
                       <div className="w-100"></div>
-                      <button className="btn-large col" onClick={this.buttonClick} id={this.state.answers[2]}>{this.state.answers[2]}</button>
-                      <button className="btn-large col"  onClick={this.buttonClick} id={this.state.answers[3]}>{this.state.answers[3]}</button>
+                      <button className="btn-large col" disabled={this.state.your_answer} onClick={this.buttonClick} id={this.state.answers[2]}>{this.state.answers[2]}</button>
+                      <button className="btn-large col" disabled={this.state.your_answer} onClick={this.buttonClick} id={this.state.answers[3]}>{this.state.answers[3]}</button>
                   </div>
               </div>   
           </div>

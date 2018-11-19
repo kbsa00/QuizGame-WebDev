@@ -6,7 +6,8 @@ import Login from './Login';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import registration from '../components/registrationform/Registration';
 import Game from './socketComponents/Game';
-import GameQuiz from './socketComponents/GameQuiz'; 
+import GameQuiz from './socketComponents/GameQuiz';
+
 
 class App extends Component{
     render(){
