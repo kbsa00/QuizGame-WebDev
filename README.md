@@ -7,7 +7,7 @@ This project is created with Node.js and React.js. The exam said that we were su
 The game is structured with 10 questions and 4 alternative answers. Only one is the correct answer. The user will have 10 seconds to answer each question. The faster you answer the higher points you will get. After the game the scoreboard of the game will present with everyone's username and points
 
 ---
-#### Libraries :book:
+### Libraries :book:
 Here are some of the important libraries of the solution.
 ###### Backend
 - PassportJS *used for login function*
@@ -91,6 +91,5 @@ I've tried my best to make the webpage looking good with css and some bootstrap/
 
 ### Resources used for this Project
 - https://www.youtube.com/watch?v=bxUlKDgpbWs&t=900s Socket IO (Research)
-- [Open Trivia DB: Free to use, user-contributed trivia question 
 - https://opentdb.com/api_config.php For Quiz Questions. - Questions is from here.
 - https://www.udemy.com/react-redux/learn/v4/content Deployment (Research)
