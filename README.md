@@ -7,7 +7,7 @@ This project is created with Node.js and React.js. The exam said that we were su
 The game is structured with 10 questions and 4 alternative answers. Only one is the correct answer. The user will have 10 seconds to answer each question. The faster you answer the higher points you will get. After the game the scoreboard of the game will present with everyone's username and points
 
 ---
-### Libraries :book:
+#### Libraries :book:
 Here are some of the important libraries of the solution.
 ###### Backend
 - PassportJS *used for login function*
@@ -26,8 +26,11 @@ Here are some of the important libraries of the solution.
 ---
 ### Code structure 
 This project has to enviorments. Development and Production. That means we are coding we have to take account for both of these enviornments. That means both of these environments are running on different Databases, use different keys etc.   
-Here is the folder structure of this project. 
+Here is the folder structure of this project.
+
 ![capture](https://user-images.githubusercontent.com/11196323/48793132-4e9fb700-ecf6-11e8-958b-2af16b90707f.PNG)
+
+
 In the folder of Client is all React.js code. In the root of this project is only Node.js related code. This is how frontend and backend is structured in this project. In this project my intentions was to always to try and split upt code in different files and folders so that anyone that were to read my code wouldn't have big problems finding the information that they need. 
 
 ##### HTTP-ROUTES
@@ -65,7 +68,7 @@ npm run dev
 - Client, Reactjs is running on port **8080**
 
 The web app will be presented in localhost:8080
-I am using PROXY in order for Server and Web to talk to eachother when doin http-requests. The package.json inside of client is the proxy object if you want to look at it.
+I am using PROXY in order for Server and Web to talk to eachother when doing http-requests. The package.json inside of client is the proxy object if you want to look at it.
 
 ---
 ### Cloud platforms :cloud:
@@ -78,9 +81,16 @@ I am using PROXY in order for Server and Web to talk to eachother when doin http
 ---
 
 ### Evaluation
-The exam had a list of requirements we had to do. I have done all of the requirements that where asked to do.
-When it comes to the extra requirements I have done all of them except for one. 
+The exam had a list of requirements we had to do. When it comes to the extra requirements I have done all of them except for one. 
 -  [x] MongoDB database
 -  [x] Redux
 -  [x] Heroku
 -  [ ] Testing
+
+I've tried my best to make the webpage looking good with css and some bootstrap/materializecss. I really don't have that much experience with css but nevertheless the page is at least ok to look at :) 
+
+### Resources used for this Project
+- https://www.youtube.com/watch?v=bxUlKDgpbWs&t=900s Socket IO (Research)
+- [Open Trivia DB: Free to use, user-contributed trivia question 
+- https://opentdb.com/api_config.php For Quiz Questions. - Questions is from here.
+- https://www.udemy.com/react-redux/learn/v4/content Deployment (Research)
