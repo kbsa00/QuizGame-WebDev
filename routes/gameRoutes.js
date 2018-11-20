@@ -12,15 +12,11 @@ module.exports = (app) => {
         if (matchId === false) {
             let generetedMatch = match.genereteMatchId(req.user.username);
             let matchCreator = match.getPartyLeaderMatch(generetedMatch);
-
-            match.printAllMatches(); 
-
             res.json({
                 MatchIdentication: generetedMatch,
                 PartyLeader: matchCreator
             });
         } else {
-            match.printAllMatches();
             let matchCreator = match.getPartyLeaderMatch(matchId)
             res.json({
                 MatchIdentication: matchId,
@@ -44,8 +40,7 @@ module.exports = (app) => {
         matchtoken = matchtoken.substring(1);
 
         let answer = match.checkMatchExist(matchtoken);
-        console.log(answer);
-
+    
         if(answer){
             res.json({
                 matchtoken: matchtoken
@@ -54,4 +49,12 @@ module.exports = (app) => {
             res.status(401).send();
         }
     });
+
+    app.post('/api/endgame', checkAuthentication, (req,res) => {
+        let matchtoken = req.body.MatchIdentication; 
+        let done = match.deleteOngoinMatch(matchtoken);
+        if(done){
+            res.status(200).send();
+        }
+    }); 
 };

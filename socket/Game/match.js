@@ -27,10 +27,6 @@ class Match {
         }
     }
 
-    printAllMatches() {
-        console.log(`ALL MATCHES: ${this.matches}`);
-    }
-
     getPartyLeaderMatch(matchToken){
         return this.matchToCreator.get(matchToken);
     }
@@ -50,7 +46,15 @@ class Match {
     }
 
     checkMatchExist(matchToken){
-        return (this.onGoingMatches.indexOf(matchToken) > -1);
+        let matchid = (this.onGoingMatches.indexOf(matchToken) > -1);
+        return matchid;
+    }
+
+    deleteOngoinMatch(matchToken){
+        this.onGoingMatches = this.onGoingMatches.filter(match => {
+            return match !== matchToken;
+        });
+        return true;
     }
 }
 

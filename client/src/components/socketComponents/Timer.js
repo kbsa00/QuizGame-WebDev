@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import io from 'socket.io-client';
+import axios from 'axios';
 
 class Timer extends Component {
     constructor(props){
@@ -22,7 +23,7 @@ class Timer extends Component {
           CountDown: this.state.CountDown - 1
         }); 
         this.props.data(this.state.CountDown);
-       // this.props.number(this.state.QuestionNumber);
+       
 
         if(this.state.CountDown < 1) { 
           clearInterval(this.interval);
@@ -43,6 +44,13 @@ class Timer extends Component {
             this.props.number(this.state.QuestionNumber);
             this.setState({gameIsOver: true});
             this.props.score();
+        }
+
+        if(this.state.QuestionNumber === 1){
+            let value = {
+                MatchIdentication: this.props.matchtoken
+            };
+            axios.post('/api/endgame', value);
         }
     }
     

@@ -67,8 +67,7 @@ class GameQuiz extends Component {
   }
 
   updateQuestionNumber(value){
-      console.log(value);
-      this.setState({questionnumber: value});
+    this.setState({questionnumber: value});
   }
 
   componentDidMount(){
@@ -85,14 +84,12 @@ class GameQuiz extends Component {
             this.setState({
                 matchtoken: res.data.matchtoken
             });
-            console.log('something');
         }).catch(err => this.setState({
             error: true
         })
     );        
   }
 
-  
 
   buttonClick(e){
     this.setState({your_answer: e.target.id});
@@ -147,7 +144,7 @@ class GameQuiz extends Component {
                       <h3 className="questiontext center">{this.state.question}</h3>
                   </div>
           
-              <div><Timer data={this.updateTimer.bind(this)} number={this.updateQuestionNumber.bind(this)} score={this.scoreRanks.bind(this)}/></div>
+              <div><Timer data={this.updateTimer.bind(this)} number={this.updateQuestionNumber.bind(this)} score={this.scoreRanks.bind(this)} matchtoken={this.state.matchtoken}/></div>
   
               <div>
                   <div className="row">
