@@ -42,9 +42,8 @@ class Timer extends Component {
         }else if(this.state.QuestionNumber === 10 && this.state.gameIsOver === false){
             this.props.number(this.state.QuestionNumber);
             this.setState({gameIsOver: true});
+            this.props.score();
         }
-
-        
     }
     
       componentDidMount() {

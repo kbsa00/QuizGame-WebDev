@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import registration from '../components/registrationform/Registration';
 import Game from './socketComponents/Game';
 import GameQuiz from './socketComponents/GameQuiz';
+import pagenotfound from './pagenotfound';
 
 
 class App extends Component{
@@ -22,6 +23,7 @@ class App extends Component{
                     <Route path='/register' component={registration}/>
                     <Route path='/gamestart' component={Game}/>
                     <Route path='/gamequiz:match' component={GameQuiz}/>
+                    <Route path='*' component={pagenotfound}/>
                  </Switch>
                  </div>
                 </BrowserRouter>

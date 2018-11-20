@@ -15,7 +15,7 @@ module.exports = (io) => {
         socket.on('findGame', (data) => {
             console.log(`${data.user} joins room ${data.MatchToken}`);
             socket.join(data.MatchToken);
-            io.in(data.MatchToken).emit(data.MatchToken, `${data.user} has joined the room`);
+           //io.in(data.MatchToken).emit(data.MatchToken, `${data.user} has joined the room`);
             let room = io.sockets.adapter.rooms[data.MatchToken];
             io.in(data.MatchToken).emit(data.MatchToken, room.length);
             console.log(`Amount of people in the room ${room.length} - ${data.MatchToken}`);
@@ -32,7 +32,8 @@ module.exports = (io) => {
         });
 
         socket.on('rank', (data) => {
-            io.emit(data.matchtoken, {username: data.username, points: data.points});
+          console.log(data.points);
+          io.emit('scoreranks', {matchtoken: data.matchtoken, username: data.username, points: data.points});
         });
     });
 };

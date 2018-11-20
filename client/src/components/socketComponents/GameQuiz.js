@@ -44,7 +44,21 @@ class GameQuiz extends Component {
         this.setState({your_answer: ''});
     }
 
-    
+    this.socket.on('scoreranks', (data) => {
+        if(data.matchtoken === this.state.matchtoken){
+            let value ={
+                username: data.username,
+                points: data.points
+            }
+            addingScoreRanks(value)
+        }
+    });
+
+    const addingScoreRanks = value => {
+        this.setState({roundrank:[...this.state.roundrank, value]});
+    }
+
+
     this.buttonClick = this.buttonClick.bind(this);
   }
 
@@ -56,6 +70,7 @@ class GameQuiz extends Component {
       console.log(value);
       this.setState({questionnumber: value});
   }
+
   componentDidMount(){
     const {
         match
@@ -73,9 +88,11 @@ class GameQuiz extends Component {
             console.log('something');
         }).catch(err => this.setState({
             error: true
-        }));
-        
+        })
+    );        
   }
+
+  
 
   buttonClick(e){
     this.setState({your_answer: e.target.id});
@@ -89,30 +106,35 @@ class GameQuiz extends Component {
     }
   }
 
-  /*
-  renderRanks(ranks){
-    console.log(this.state.roundrank);
-    this.state.roundrank.map((obj) => {
-        return(
-            <div>
-                <h5>{obj.username + ' ' + obj.points }</h5>
-            </div>
-        );
-    });
+  scoreRanks(){
+    this.socket.emit('rank', {matchtoken: this.state.matchtoken, username: this.props.auth.username, points: this.state.points});
   }
-  */
+
+  renderScores(){
+      return _.map(this.state.roundrank, scores => {
+          return(
+              <li key={scores.username} className="list-group-item">{`Name: ${scores.username} Points: ${scores.points}`}</li>
+          );
+      });
+  }
+
+
   render() {
 
     if(this.state.questionnumber === 10 && this.state.timer === 0){
-        /*this.socket.emit('rank', {matchtoken: this.state.matchtoken, username: this.props.auth.username, points: this.state.points});
+        
           return(
             <div className="container">
-                <h2 className="center">THE GAME IS FUCKING OVER BITCH</h2>
-                {this.renderRanks()}
-                
+                <div className="textbox">
+                    <h4 className="center">END OF THE QUIZ</h4>
+                    <h6 className="center">Scoreboard</h6>
+                    <ul className="list-group">
+                        {this.renderScores()}
+                    </ul>
+                </div> 
             </div>
           );
-          */
+        
     }
     else if(!this.state.error){
         return(
@@ -125,7 +147,7 @@ class GameQuiz extends Component {
                       <h3 className="questiontext center">{this.state.question}</h3>
                   </div>
           
-              <div><Timer data={this.updateTimer.bind(this)} number={this.updateQuestionNumber.bind(this)}/></div>
+              <div><Timer data={this.updateTimer.bind(this)} number={this.updateQuestionNumber.bind(this)} score={this.scoreRanks.bind(this)}/></div>
   
               <div>
                   <div className="row">
