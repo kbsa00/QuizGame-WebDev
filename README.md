@@ -1,4 +1,4 @@
-## Exam - PG6300
+## Webdevelopment and API design Exam 
 
 ### About the project
 This project is created with Node.js and React.js. The exam said that we were supposed to create Quiz multiplayergame. My game works just how the exam described how the game supposed to work. User 1 starts a game. If there's no current game User 1 will then create one automacially. User 2 press find game. Now that User1 already created a match User 2 will now join this match. Now everybody will wait for User1 to finally start the game. 
